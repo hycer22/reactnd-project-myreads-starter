@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import BookInfo from './BookInfo';
 import {Link} from 'react-router-dom';
+import {Debounce} from 'react-throttle';
 
 
 class Search extends Component {
@@ -24,10 +25,7 @@ class Search extends Component {
           <div className="search-books-results">
             {this.props.hasResults ? (
               <ol className="books-grid">
-                {this.props.searchedBooks
-                  // display only books not on the shelves
-                  .filter((book) => book.shelf === "none")
-                  .map((book) =>
+                {this.props.searchedBooks.map((book) =>
                   <li><BookInfo book={book} onUpdateList={this.props.onUpdateList} key={book.id} /></li>
                 )}
               </ol>
